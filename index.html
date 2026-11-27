@@ -1,0 +1,2025 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Light Horizon: Interstellar Photon Radar</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter & JetBrains Mono Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        space: {
+                            950: '#04060d',
+                            900: '#070b19',
+                            800: '#0d1429',
+                            700: '#162040',
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+
+    <style>
+        body {
+            background-color: #04060d;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #070b19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #38bdf8;
+        }
+
+        /* Custom Range Slider Style */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #38bdf8;
+            cursor: pointer;
+            margin-top: -6px;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
+            border: 2px solid #ffffff;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #1e293b;
+            border-radius: 2px;
+        }
+
+        /* Make datetime-local calendar icon white */
+        input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+        }
+
+        .glass-panel {
+            background: rgba(13, 20, 41, 0.78);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.16);
+        }
+
+        .glow-text-cyan {
+            text-shadow: 0 0 14px rgba(56, 189, 248, 0.45);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans antialiased selection:bg-sky-500/30 selection:text-sky-200">
+
+    <!-- Top Header Bar -->
+    <header class="border-b border-sky-500/15 bg-space-900/90 backdrop-blur-md sticky top-0 z-30">
+        <div class="max-w-[1600px] mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-400 to-indigo-600 flex items-center justify-center shadow-lg shadow-sky-500/20">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="3" fill="currentColor"></circle>
+                        <circle cx="12" cy="12" r="7" stroke-dasharray="3 3" stroke-width="1.5"></circle>
+                        <circle cx="12" cy="12" r="10.5" stroke-opacity="0.5" stroke-width="1"></circle>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-base sm:text-lg font-bold tracking-tight text-white flex items-center gap-2">
+                        Cosmic Light Horizon <span class="text-sky-400 font-normal hidden sm:inline">| Interstellar Journey</span>
+                    </h1>
+                    <p class="text-[11px] text-slate-400 font-mono">c = 299,792,458 m/s • Interstellar Photon Tracking Radar</p>
+                </div>
+            </div>
+
+            <!-- Live Status & Privacy Indicator -->
+            <div class="flex flex-wrap items-center gap-2 sm:gap-3 text-xs">
+                <div class="px-2.5 py-1 rounded-full bg-slate-800/90 border border-slate-700/80 text-slate-300 font-medium flex items-center gap-1.5" title="Your data is calculated strictly in local browser memory and is never sent to a server or saved.">
+                    <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    <span class="hidden md:inline">No Data Saved (100% Local)</span>
+                    <span class="md:hidden">Zero Storage</span>
+                </div>
+                <div id="simModeBadge" class="hidden px-2.5 py-1 rounded-full bg-amber-500/15 border border-amber-500/40 text-amber-300 font-medium flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+                    <span>Target Date Mode</span>
+                </div>
+                <div id="liveBadge" class="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-medium flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>Live (Now)</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Layout -->
+    <main class="flex-1 max-w-[1600px] w-full mx-auto p-3 sm:p-4 lg:p-5 grid grid-cols-1 lg:grid-cols-12 gap-4">
+
+        <!-- LEFT PANEL: Controls & Live Telemetry (4 Columns) -->
+        <aside class="lg:col-span-4 flex flex-col gap-4 order-2 lg:order-1">
+
+            <!-- 1. Origin Moment (Your Birth Date) -->
+            <section class="glass-panel rounded-2xl p-4 shadow-xl">
+                <div class="flex items-center justify-between mb-3">
+                    <h2 class="text-xs font-semibold uppercase tracking-wider text-sky-400 flex items-center gap-1.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        Origin Moment (Your Birth Date)
+                    </h2>
+                </div>
+
+                <div class="space-y-3">
+                    <div>
+                        <label for="birthInput" class="block text-xs text-slate-400 mb-1">Date and Time of Birth:</label>
+                        <input type="datetime-local" id="birthInput" 
+                               class="w-full bg-space-950/90 border border-slate-700/80 focus:border-sky-400 rounded-xl px-3 py-2.5 text-sm text-white font-mono outline-none transition">
+                    </div>
+
+                    <!-- Quick Birth Date Presets -->
+                    <div class="grid grid-cols-2 gap-1.5 pt-1">
+                        <button type="button" data-preset="default2013" class="preset-btn px-2.5 py-2 rounded-lg bg-slate-800/80 hover:bg-sky-500/20 border border-slate-700/70 hover:border-sky-500/50 text-xs text-slate-200 transition text-center">
+                            May 15, 2013
+                        </button>
+                        <button type="button" data-preset="2000" class="preset-btn px-2.5 py-2 rounded-lg bg-slate-800/80 hover:bg-sky-500/20 border border-slate-700/70 hover:border-sky-500/50 text-xs text-slate-200 transition text-center">
+                            Jan 1, 2000
+                        </button>
+                        <button type="button" data-preset="1990" class="preset-btn px-2.5 py-2 rounded-lg bg-slate-800/80 hover:bg-sky-500/20 border border-slate-700/70 hover:border-sky-500/50 text-xs text-slate-200 transition text-center">
+                            Jun 15, 1990
+                        </button>
+                        <button type="button" data-preset="apollo11" class="preset-btn px-2.5 py-2 rounded-lg bg-slate-800/80 hover:bg-amber-500/20 border border-slate-700/70 hover:border-amber-500/50 text-xs text-amber-200 transition text-center">
+                            Moon Landing (1969)
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Live Cosmic Distance Telemetry -->
+            <section class="glass-panel rounded-2xl p-4 shadow-xl relative overflow-hidden">
+                <div class="absolute -right-8 -top-8 w-28 h-28 bg-sky-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                
+                <h2 class="text-xs font-semibold uppercase tracking-wider text-sky-400 mb-3 flex items-center gap-1.5">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    Light Wave Telemetry
+                </h2>
+
+                <!-- Main Light-Years Display -->
+                <div class="bg-space-950/80 border border-sky-500/25 rounded-xl p-3.5 mb-3">
+                    <div class="text-[11px] text-slate-400 mb-0.5">Cosmic Distance Traveled</div>
+                    <div class="flex items-baseline gap-2">
+                        <span id="lyValue" class="text-2xl sm:text-3xl font-bold font-mono text-sky-300 glow-text-cyan">0.00000000</span>
+                        <span class="text-xs font-semibold text-sky-400">Light-Years</span>
+                    </div>
+                    <div id="simDateDisplay" class="text-[11px] font-mono text-slate-400 mt-1">
+                        Observation Time: Live (Now)
+                    </div>
+                </div>
+
+                <!-- Sub-metrics -->
+                <div class="grid grid-cols-2 gap-2.5 text-xs">
+                    <div class="bg-space-950/60 border border-slate-800 rounded-xl p-2.5">
+                        <div class="text-slate-400 text-[11px]">Kilometers (km)</div>
+                        <div id="kmValue" class="font-mono font-semibold text-slate-100 mt-0.5 truncate">0 km</div>
+                    </div>
+                    <div class="bg-space-950/60 border border-slate-800 rounded-xl p-2.5">
+                        <div class="text-slate-400 text-[11px]">Astronomical Units (AU)</div>
+                        <div id="auValue" class="font-mono font-semibold text-amber-300 mt-0.5 truncate">0 AU</div>
+                    </div>
+                    <div class="bg-space-950/60 border border-slate-800 rounded-xl p-2.5 col-span-2 flex justify-between items-center">
+                        <div>
+                            <div class="text-slate-400 text-[11px]">Total Elapsed Time</div>
+                            <div id="secValue" class="font-mono font-semibold text-slate-200 mt-0.5">0 sec</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-slate-400 text-[11px]">Passed / Total Objects</div>
+                            <div id="passedCount" class="font-mono font-bold text-emerald-400 mt-0.5">0 / 48</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Where Will My Light Be On This Date? & Radar Scale -->
+            <section class="glass-panel rounded-2xl p-4 shadow-xl space-y-4">
+                <!-- Radar View Scale -->
+                <div>
+                    <div class="flex justify-between items-center mb-1.5">
+                        <label for="zoomSlider" class="text-xs font-semibold text-slate-200">Radar View Scale</label>
+                        <span id="zoomLabel" class="text-xs font-mono text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded">20.0 Light-Years</span>
+                    </div>
+                    <input type="range" id="zoomSlider" min="0" max="100" step="0.5" value="44" class="w-full">
+                    
+                    <!-- Quick Scale Buttons -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 gap-1.5 mt-2">
+                        <button type="button" data-zoom="0.003" class="zoom-preset-btn px-2 py-1.5 rounded-lg bg-space-950/80 hover:bg-cyan-500/20 border border-slate-800 hover:border-cyan-500/40 text-[11px] text-cyan-200 transition">
+                            Solar System / Voyager
+                        </button>
+                        <button type="button" data-zoom="20" class="zoom-preset-btn px-2 py-1.5 rounded-lg bg-space-950/80 hover:bg-sky-500/20 border border-slate-800 hover:border-sky-500/40 text-[11px] text-slate-200 transition">
+                            Nearby Stars (20 ly)
+                        </button>
+                        <button type="button" data-zoom="50" class="zoom-preset-btn px-2 py-1.5 rounded-lg bg-space-950/80 hover:bg-sky-500/20 border border-slate-800 hover:border-sky-500/40 text-[11px] text-slate-200 transition">
+                            Medium Scale (50 ly)
+                        </button>
+                        <button type="button" data-zoom="700" class="zoom-preset-btn px-2 py-1.5 rounded-lg bg-space-950/80 hover:bg-sky-500/20 border border-slate-800 hover:border-sky-500/40 text-[11px] text-slate-200 transition">
+                            Wide Galaxy (700 ly)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Target Date Selector ("Where Will My Light Be On This Date?") -->
+                <div class="pt-3 border-t border-slate-800/80 space-y-2.5">
+                    <div class="flex justify-between items-center">
+                        <label for="targetDateInput" class="text-xs font-semibold text-amber-300 flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Where Will My Light Be On This Date?
+                        </label>
+                        <button type="button" id="liveToggleBtn" class="text-[11px] px-2.5 py-1 rounded-md bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-medium transition">
+                            Live (Now)
+                        </button>
+                    </div>
+
+                    <input type="datetime-local" id="targetDateInput" 
+                           class="w-full bg-space-950/90 border border-amber-500/30 focus:border-amber-400 rounded-xl px-3 py-2 text-xs text-amber-100 font-mono outline-none transition">
+
+                    <!-- Quick Time-Jump Buttons -->
+                    <div class="grid grid-cols-4 gap-1.5">
+                        <button type="button" data-future="now" class="future-btn px-2 py-1.5 rounded-lg bg-space-950/80 hover:bg-emerald-500/20 border border-slate-800 hover:border-emerald-500/40 text-[11px] text-emerald-300 transition">
+                            Now
+                        </button>
+                        <button type="button" data-future="10y" class="future-btn px-2 py-1.5 rounded-lg bg-space-950/80 hover:bg-amber-500/20 border border-slate-800 hover:border-amber-500/40 text-[11px] text-slate-300 hover:text-amber-200 transition">
+                            +10 Years
+                        </button>
+                        <button type="button" data-future="2050" class="future-btn px-2 py-1.5 rounded-lg bg-space-950/80 hover:bg-amber-500/20 border border-slate-800 hover:border-amber-500/40 text-[11px] text-slate-300 hover:text-amber-200 transition">
+                            Jan 1 2050
+                        </button>
+                        <button type="button" data-future="2100" class="future-btn px-2 py-1.5 rounded-lg bg-space-950/80 hover:bg-amber-500/20 border border-slate-800 hover:border-amber-500/40 text-[11px] text-slate-300 hover:text-amber-200 transition">
+                            Jan 1 2100
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Time-Travel Scrubbing Slider (Years Offset from Birth) -->
+                <div class="pt-3 border-t border-slate-800/80 space-y-1.5">
+                    <div class="flex justify-between items-center">
+                        <label for="timeTravelSlider" class="text-xs font-semibold text-sky-300 flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg>
+                            Time-Travel Slider (Age / Elapsed Years)
+                        </label>
+                        <span id="timeTravelLabel" class="text-[11px] font-mono text-amber-300 bg-amber-500/10 px-2 py-0.5 rounded">Live</span>
+                    </div>
+                    <input type="range" id="timeTravelSlider" min="0" max="600" step="0.5" value="13.5" class="w-full">
+                    <div class="flex justify-between text-[10px] font-mono text-slate-500">
+                        <span>0 yr (Birth)</span>
+                        <span>100 yr</span>
+                        <span>300 yr</span>
+                        <span>600 yr</span>
+                    </div>
+                </div>
+
+                <!-- 1901 First Radio Wave Ring Toggle -->
+                <div class="pt-3 border-t border-slate-800/80">
+                    <div class="flex items-center justify-between gap-2">
+                        <div>
+                            <div class="text-xs font-semibold text-fuchsia-300 flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-fuchsia-400"></span>
+                                1901 First Radio Wave Ring
+                            </div>
+                            <p id="radioRingDistText" class="text-[10px] text-slate-400 font-mono mt-0.5">
+                                Marconi Transatlantic Signal • 125.0 Light-Years
+                            </p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer shrink-0">
+                            <input type="checkbox" id="radioRingToggle" class="sr-only peer" checked>
+                            <div class="w-10 h-5 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-slate-300 after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-fuchsia-600 peer-checked:after:bg-white"></div>
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Scientific Reality Note -->
+            <section class="rounded-2xl p-4 bg-gradient-to-br from-indigo-950/60 to-space-900/90 border border-indigo-500/25 shadow-lg">
+                <div class="flex items-start gap-2.5">
+                    <div class="p-1.5 rounded-lg bg-indigo-500/20 text-indigo-300 mt-0.5 shrink-0">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <div class="text-xs leading-relaxed text-slate-300 space-y-1.5">
+                        <h3 class="font-semibold text-indigo-200">Physics Note: Why Speed of Light?</h3>
+                        <p>
+                            While your body heat (~9.5 µm thermal infrared) is absorbed by indoor walls and atmospheric molecules, the <strong>visible light photons</strong> and <strong>radio waves</strong> that escaped into space at the moment of your birth continue traveling through the cosmos at <span class="font-mono text-sky-300">299,792 km/s</span>.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+        </aside>
+
+        <!-- RIGHT PANEL: Interactive Space Radar & Star Catalog (8 Columns) -->
+        <section class="lg:col-span-8 flex flex-col gap-4 order-1 lg:order-2">
+            
+            <!-- Canvas Area -->
+            <div class="glass-panel rounded-2xl p-2 sm:p-3 shadow-2xl relative flex flex-col">
+                <div id="canvasContainer" class="relative w-full h-[430px] sm:h-[530px] lg:h-[600px] rounded-xl overflow-hidden bg-space-950 cursor-crosshair select-none">
+                    <canvas id="spaceCanvas" class="block w-full h-full"></canvas>
+
+                    <!-- Top-Right Legend -->
+                    <div class="absolute top-3 right-3 bg-space-900/85 backdrop-blur-md border border-slate-700/60 rounded-xl p-2.5 text-[11px] space-y-1.5 pointer-events-none">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full border-2 border-sky-400 bg-sky-400/20 shadow-[0_0_8px_#38bdf8]"></span>
+                            <span class="text-sky-200 font-medium">Your Light Horizon</span>
+                        </div>
+                        <div id="legendRadioRow" class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full border border-dashed border-fuchsia-400 bg-fuchsia-400/10"></span>
+                            <span class="text-fuchsia-200 font-medium">1901 First Radio Wave</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-[0_0_8px_#fbbf24]"></span>
+                            <span class="text-slate-200">Star Passed by Your Light</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rotate-45 bg-cyan-300 border border-white"></span>
+                            <span class="text-cyan-200">Voyager 1 & 2 Probes</span>
+                        </div>
+                    </div>
+
+                    <!-- Bottom-Left Hint -->
+                    <div class="absolute bottom-3 left-3 bg-space-900/80 backdrop-blur-sm border border-slate-800 rounded-lg px-2.5 py-1.5 text-[11px] text-slate-400 pointer-events-none hidden sm:block">
+                        Scroll mouse wheel to zoom • Click any celestial object for details
+                    </div>
+
+                    <!-- Selected Star / Probe Telemetry Card -->
+                    <div id="starCard" class="hidden absolute bottom-3 right-3 left-3 sm:left-auto sm:w-80 bg-space-900/95 backdrop-blur-xl border border-sky-500/40 rounded-xl p-3.5 shadow-2xl transition-all">
+                        <div class="flex justify-between items-start gap-2">
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <h3 id="cardStarName" class="font-bold text-white text-sm">Sirius</h3>
+                                    <span id="cardStatusBadge" class="text-[10px] px-2 py-0.5 rounded-full font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                                        Passed
+                                    </span>
+                                </div>
+                                <p id="cardStarMeta" class="text-[11px] text-slate-400 mt-0.5">Canis Major • A1 V</p>
+                            </div>
+                            <button type="button" id="closeCardBtn" class="text-slate-400 hover:text-white p-1" aria-label="Close">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            </button>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-2 mt-3 pt-2.5 border-t border-slate-800 text-xs">
+                            <div>
+                                <span class="text-[10px] text-slate-400 block">Distance from Earth</span>
+                                <span id="cardDistance" class="font-mono font-semibold text-sky-300">8.60 Light-Years</span>
+                            </div>
+                            <div>
+                                <span id="cardArrivalLabel" class="text-[10px] text-slate-400 block">Arrival Date / Time</span>
+                                <span id="cardArrivalDate" class="font-mono font-semibold text-amber-300 text-[11px]">-</span>
+                            </div>
+                        </div>
+                        <p id="cardDescription" class="text-[11px] text-slate-300 mt-2.5 leading-relaxed bg-space-950/60 p-2 rounded-lg border border-slate-800/80">
+                            Description
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Star Catalog Quick-Access Strip -->
+            <div class="glass-panel rounded-2xl p-4 shadow-xl">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <h2 class="text-xs font-semibold uppercase tracking-wider text-sky-400 flex items-center gap-1.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                        Space Probes & Star Catalog (<span id="catalogTotalLabel">48</span> Objects)
+                    </h2>
+                    <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+                        <input type="text" id="catalogSearchInput" placeholder="Search star or spectral class (e.g. Vega, G0 V, Giant)..." 
+                               class="w-full sm:w-64 bg-space-950/90 border border-slate-700/80 focus:border-sky-400 rounded-lg px-2.5 py-1 text-xs text-slate-200 placeholder-slate-500 outline-none transition">
+                        <select id="catalogFilterSelect" class="bg-space-950/90 border border-slate-700/80 focus:border-sky-400 rounded-lg px-2 py-1 text-xs text-slate-300 outline-none transition">
+                            <option value="all">All Objects</option>
+                            <option value="passed">Passed by My Light</option>
+                            <option value="upcoming">Not Reached Yet</option>
+                            <option value="10to50">10–50 Light-Years</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="starChipsContainer" class="flex gap-2 overflow-x-auto pb-1.5">
+                    <!-- Dynamically populated via JavaScript -->
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <script>
+        (function () {
+            'use strict';
+
+            // --- PHYSICAL CONSTANTS ---
+            const SPEED_OF_LIGHT_KMPS = 299792.458; // km/s
+            const SECONDS_PER_JULIAN_YEAR = 31557600; // 365.25 days * 86400 sec
+            const KM_PER_LIGHT_YEAR = SPEED_OF_LIGHT_KMPS * SECONDS_PER_JULIAN_YEAR; // ~9.46073e12 km
+            const KM_PER_AU = 149597870.7; // 1 Astronomical Unit (km)
+            const AU_PER_LIGHT_YEAR = KM_PER_LIGHT_YEAR / KM_PER_AU; // ~63241.077 AU
+
+            // Zoom Limits (Light-Years)
+            const MIN_ZOOM_LY = 0.001; // ~63.2 AU (Voyager 1 & 2 scale)
+            const MAX_ZOOM_LY = 700.0; // Wide Galaxy (includes Betelgeuse)
+
+            // Guglielmo Marconi's first transatlantic radio broadcast (Dec 12, 1901, 15:30 UTC)
+            const FIRST_RADIO_BROADCAST_MS = Date.UTC(1901, 11, 12, 15, 30, 0);
+
+            // Voyager 1 & 2 Reference Epoch: Jan 1, 2026 00:00 UTC
+            const VOYAGER_REF_MS = Date.UTC(2026, 0, 1, 0, 0, 0);
+
+            // Default Birth Date: May 15, 2013 12:00
+            const DEFAULT_BIRTH_STR = '2013-05-15T12:00';
+
+            // --- APPLICATION STATE ---
+            const state = {
+                birthTimestamp: new Date(DEFAULT_BIRTH_STR).getTime(),
+                isLive: true,
+                targetTimestamp: Date.now(),
+                maxRadiusLY: 20.0,
+                showRadioRing: true,
+                selectedStarId: null,
+                hoveredStarId: null,
+                catalogSearch: '',
+                catalogFilter: 'all',
+                bgStars: [],
+                starScreenCoords: []
+            };
+
+            // --- DOM ELEMENTS ---
+            const canvas = document.getElementById('spaceCanvas');
+            const ctx = canvas.getContext('2d');
+            const canvasContainer = document.getElementById('canvasContainer');
+
+            const birthInput = document.getElementById('birthInput');
+            const targetDateInput = document.getElementById('targetDateInput');
+            const liveToggleBtn = document.getElementById('liveToggleBtn');
+            const zoomSlider = document.getElementById('zoomSlider');
+            const zoomLabel = document.getElementById('zoomLabel');
+            const timeTravelSlider = document.getElementById('timeTravelSlider');
+            const timeTravelLabel = document.getElementById('timeTravelLabel');
+            const radioRingToggle = document.getElementById('radioRingToggle');
+            const radioRingDistText = document.getElementById('radioRingDistText');
+            const legendRadioRow = document.getElementById('legendRadioRow');
+
+            const lyValueEl = document.getElementById('lyValue');
+            const kmValueEl = document.getElementById('kmValue');
+            const auValueEl = document.getElementById('auValue');
+            const secValueEl = document.getElementById('secValue');
+            const passedCountEl = document.getElementById('passedCount');
+            const simDateDisplayEl = document.getElementById('simDateDisplay');
+            const simModeBadge = document.getElementById('simModeBadge');
+            const liveBadge = document.getElementById('liveBadge');
+
+            const starCard = document.getElementById('starCard');
+            const closeCardBtn = document.getElementById('closeCardBtn');
+            const starChipsContainer = document.getElementById('starChipsContainer');
+            const catalogSearchInput = document.getElementById('catalogSearchInput');
+            const catalogFilterSelect = document.getElementById('catalogFilterSelect');
+            const catalogTotalLabel = document.getElementById('catalogTotalLabel');
+
+            /**
+             * Converts a Date object into a datetime-local input string (YYYY-MM-DDTHH:mm)
+             */
+            function toLocalDatetimeInputString(date) {
+                if (!(date instanceof Date) || isNaN(date.getTime())) {
+                    return DEFAULT_BIRTH_STR;
+                }
+                const pad = (n) => String(n).padStart(2, '0');
+                return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+            }
+
+            /**
+             * English date and time formatter
+             */
+            function formatEnglishDateTime(timestampMs) {
+                const d = new Date(timestampMs);
+                if (isNaN(d.getTime())) return 'Distant Future';
+                return d.toLocaleString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            }
+
+            /**
+             * Returns dynamic Voyager 1 & 2 coordinates and the 48-object stellar catalog
+             */
+            function getCosmicTargets(simTimeMs) {
+                const yearsSince2026 = (simTimeMs - VOYAGER_REF_MS) / (SECONDS_PER_JULIAN_YEAR * 1000);
+
+                // Voyager 1: ~166.5 AU at start of 2026, velocity ~3.6 AU/year
+                const v1AU = Math.max(1.0, 166.5 + yearsSince2026 * 3.6);
+                const v1LY = v1AU / AU_PER_LIGHT_YEAR;
+                const v1LightHours = (v1LY * SECONDS_PER_JULIAN_YEAR) / 3600;
+
+                // Voyager 2: ~139.5 AU at start of 2026, velocity ~3.1 AU/year
+                const v2AU = Math.max(1.0, 139.5 + yearsSince2026 * 3.1);
+                const v2LY = v2AU / AU_PER_LIGHT_YEAR;
+                const v2LightHours = (v2LY * SECONDS_PER_JULIAN_YEAR) / 3600;
+
+                return [
+                    // --- INTERSTELLAR SPACE PROBES (< 0.01 ly) ---
+                    {
+                        id: 'voyager2',
+                        name: 'Voyager 2',
+                        distanceLY: v2LY,
+                        displayDist: `${v2AU.toFixed(1)} AU (${v2LightHours.toFixed(1)} Light-Hours)`,
+                        angleDeg: 305,
+                        constellation: 'Pavo Direction',
+                        spectral: 'NASA Interstellar Probe (1977)',
+                        color: '#22d3ee',
+                        radius: 4.5,
+                        priority: 1,
+                        isProbe: true,
+                        desc: `Launched in 1977. Currently traveling through interstellar space ~${(v2AU * KM_PER_AU / 1e9).toFixed(1)} billion km from Earth.`
+                    },
+                    {
+                        id: 'voyager1',
+                        name: 'Voyager 1',
+                        distanceLY: v1LY,
+                        displayDist: `${v1AU.toFixed(1)} AU (${v1LightHours.toFixed(1)} Light-Hours)`,
+                        angleDeg: 258,
+                        constellation: 'Ophiuchus Direction',
+                        spectral: 'NASA Interstellar Probe (1977)',
+                        color: '#38bdf8',
+                        radius: 5,
+                        priority: 1,
+                        isProbe: true,
+                        desc: `Farthest human-made object from Earth. Carrying the Golden Record ~${(v1AU * KM_PER_AU / 1e9).toFixed(1)} billion km away.`
+                    },
+                    // --- NEAREST NEIGHBOR STARS (< 10 ly) ---
+                    {
+                        id: 'proxima',
+                        name: 'Proxima Centauri',
+                        distanceLY: 4.24,
+                        displayDist: '4.24 ly',
+                        angleDeg: 215,
+                        constellation: 'Centaurus',
+                        spectral: 'M5.5 Ve Red Dwarf',
+                        color: '#fb7185',
+                        radius: 4.5,
+                        priority: 1,
+                        desc: 'The closest known star to the Solar System, hosting the Earth-sized habitable-zone exoplanet Proxima b.'
+                    },
+                    {
+                        id: 'alpha_cen',
+                        name: 'Alpha Centauri',
+                        distanceLY: 4.37,
+                        displayDist: '4.37 ly',
+                        angleDeg: 224,
+                        constellation: 'Centaurus',
+                        spectral: 'G2 V + K1 V Binary',
+                        color: '#fef08a',
+                        radius: 5.5,
+                        priority: 1,
+                        desc: 'The 3rd brightest star system in the night sky, featuring a primary star nearly identical to our Sun.'
+                    },
+                    {
+                        id: 'barnard',
+                        name: "Barnard's Star",
+                        distanceLY: 5.96,
+                        displayDist: '5.96 ly',
+                        angleDeg: 270,
+                        constellation: 'Ophiuchus',
+                        spectral: 'M4 Ve Red Dwarf',
+                        color: '#f43f5e',
+                        radius: 4,
+                        priority: 2,
+                        desc: 'Famous for having the highest proper motion (fastest apparent movement across the sky) of any known star.'
+                    },
+                    {
+                        id: 'wolf359',
+                        name: 'Wolf 359',
+                        distanceLY: 7.86,
+                        displayDist: '7.86 ly',
+                        angleDeg: 165,
+                        constellation: 'Leo',
+                        spectral: 'M6.5 Ve Red Dwarf',
+                        color: '#fb7185',
+                        radius: 4,
+                        priority: 2,
+                        desc: 'One of the faintest and lowest-mass stars in our immediate solar neighborhood.'
+                    },
+                    {
+                        id: 'sirius',
+                        name: 'Sirius (Dog Star)',
+                        distanceLY: 8.60,
+                        displayDist: '8.60 ly',
+                        angleDeg: 101,
+                        constellation: 'Canis Major',
+                        spectral: 'A1 V White Main-Sequence',
+                        color: '#e0f2fe',
+                        radius: 6.5,
+                        priority: 1,
+                        desc: 'The brightest star in Earth’s night sky, shining roughly 25 times more luminously than the Sun.'
+                    },
+                    {
+                        id: 'ross154',
+                        name: 'Ross 154',
+                        distanceLY: 9.68,
+                        displayDist: '9.68 ly',
+                        angleDeg: 286,
+                        constellation: 'Sagittarius',
+                        spectral: 'M3.5 Ve Flare Star',
+                        color: '#fda4af',
+                        radius: 4,
+                        priority: 2,
+                        desc: 'A nearby red dwarf flare star in Sagittarius capable of sudden, dramatic increases in brightness.'
+                    },
+                    // --- EXPANDED 10 TO 50 LIGHT-YEAR CATALOG (38 STARS) ---
+                    {
+                        id: 'epsilon_eri',
+                        name: 'Epsilon Eridani',
+                        distanceLY: 10.52,
+                        displayDist: '10.52 ly',
+                        angleDeg: 53,
+                        constellation: 'Eridanus',
+                        spectral: 'K2 V Orange Main-Sequence',
+                        color: '#fdba74',
+                        radius: 4.5,
+                        priority: 2,
+                        desc: 'A young, active Sun-like star surrounded by debris belts and at least one Jupiter-class exoplanet.'
+                    },
+                    {
+                        id: 'ross128',
+                        name: 'Ross 128',
+                        distanceLY: 11.03,
+                        displayDist: '11.03 ly',
+                        angleDeg: 176,
+                        constellation: 'Virgo',
+                        spectral: 'M4 V Red Dwarf',
+                        color: '#fda4af',
+                        radius: 4,
+                        priority: 2,
+                        desc: 'A quiet red dwarf hosting Ross 128 b, a temperate, Earth-sized rocky world in the habitable zone.'
+                    },
+                    {
+                        id: 'cygni61',
+                        name: '61 Cygni',
+                        distanceLY: 11.40,
+                        displayDist: '11.40 ly',
+                        angleDeg: 316,
+                        constellation: 'Cygnus',
+                        spectral: 'K5 V + K7 V Binary',
+                        color: '#fb923c',
+                        radius: 4.5,
+                        priority: 2,
+                        desc: 'Historic binary star system—the very first star to have its distance measured via stellar parallax in 1838.'
+                    },
+                    {
+                        id: 'procyon_a',
+                        name: 'Procyon A',
+                        distanceLY: 11.50,
+                        displayDist: '11.50 ly',
+                        angleDeg: 115,
+                        constellation: 'Canis Minor',
+                        spectral: 'F5 IV-V Yellow-White Subgiant',
+                        color: '#fef9c3',
+                        radius: 5.5,
+                        priority: 1,
+                        desc: 'The 8th brightest star in the night sky, a luminous yellow-white subgiant about 7 times brighter than the Sun.'
+                    },
+                    {
+                        id: 'groombridge34',
+                        name: 'Groombridge 34',
+                        distanceLY: 11.62,
+                        displayDist: '11.62 ly',
+                        angleDeg: 8,
+                        constellation: 'Andromeda',
+                        spectral: 'M1.5 V + M3.5 V Binary Dwarf',
+                        color: '#fb7185',
+                        radius: 4.2,
+                        priority: 3,
+                        desc: 'A binary red dwarf system in Andromeda orbited by two known exoplanets.'
+                    },
+                    {
+                        id: 'epsilon_indi',
+                        name: 'Epsilon Indi',
+                        distanceLY: 11.87,
+                        displayDist: '11.87 ly',
+                        angleDeg: 331,
+                        constellation: 'Indus',
+                        spectral: 'K5 V Orange Main-Sequence',
+                        color: '#fdba74',
+                        radius: 4.5,
+                        priority: 2,
+                        desc: 'An orange dwarf slightly cooler than the Sun, accompanied by a super-Jupiter planet and binary brown dwarfs.'
+                    },
+                    {
+                        id: 'tau_ceti',
+                        name: 'Tau Ceti',
+                        distanceLY: 11.91,
+                        displayDist: '11.91 ly',
+                        angleDeg: 26,
+                        constellation: 'Cetus',
+                        spectral: 'G8.5 V Yellow Main-Sequence',
+                        color: '#fef08a',
+                        radius: 5,
+                        priority: 1,
+                        desc: 'One of the closest Sun-like G-type stars, surrounded by a dense debris disk and multiple candidate planets.'
+                    },
+                    {
+                        id: 'luyten',
+                        name: "Luyten's Star",
+                        distanceLY: 12.35,
+                        displayDist: '12.35 ly',
+                        angleDeg: 111,
+                        constellation: 'Canis Minor',
+                        spectral: 'M3.5 V Red Dwarf',
+                        color: '#fb7185',
+                        radius: 4,
+                        priority: 3,
+                        desc: 'Hosts GJ 273b, a potentially habitable super-Earth targeted by interstellar radio transmissions.'
+                    },
+                    {
+                        id: 'teegarden',
+                        name: "Teegarden's Star",
+                        distanceLY: 12.50,
+                        displayDist: '12.50 ly',
+                        angleDeg: 43,
+                        constellation: 'Aries',
+                        spectral: 'M7 V Ultra-Cool Dwarf',
+                        color: '#f43f5e',
+                        radius: 4,
+                        priority: 2,
+                        desc: 'An ultra-cool red dwarf hosting two Earth-mass rocky exoplanets (Teegarden b and c) in its habitable zone.'
+                    },
+                    {
+                        id: 'kapteyn',
+                        name: "Kapteyn's Star",
+                        distanceLY: 12.83,
+                        displayDist: '12.83 ly',
+                        angleDeg: 78,
+                        constellation: 'Pictor',
+                        spectral: 'M1 V Subdwarf',
+                        color: '#fda4af',
+                        radius: 4,
+                        priority: 3,
+                        desc: 'An ancient halo subdwarf star orbiting the Milky Way in a retrograde direction.'
+                    },
+                    {
+                        id: 'wolf1061',
+                        name: 'Wolf 1061',
+                        distanceLY: 13.80,
+                        displayDist: '13.80 ly',
+                        angleDeg: 247,
+                        constellation: 'Ophiuchus',
+                        spectral: 'M3 V Red Dwarf',
+                        color: '#fb7185',
+                        radius: 4.5,
+                        priority: 2,
+                        desc: 'A nearby red dwarf system featuring Wolf 1061c, a rocky super-Earth inside its habitable zone.'
+                    },
+                    {
+                        id: 'gliese876',
+                        name: 'Gliese 876',
+                        distanceLY: 15.25,
+                        displayDist: '15.25 ly',
+                        angleDeg: 342,
+                        constellation: 'Aquarius',
+                        spectral: 'M4 V Red Dwarf',
+                        color: '#fb7185',
+                        radius: 4.2,
+                        priority: 3,
+                        desc: 'One of the first red dwarfs discovered with a multi-planet system locked in Laplace orbital resonance.'
+                    },
+                    {
+                        id: 'eridani40',
+                        name: '40 Eridani (Keid)',
+                        distanceLY: 16.39,
+                        displayDist: '16.39 ly',
+                        angleDeg: 63,
+                        constellation: 'Eridanus',
+                        spectral: 'K0.5 V Triple Star System',
+                        color: '#fdba74',
+                        radius: 4.5,
+                        priority: 3,
+                        desc: 'A triple star system featuring an orange main-sequence star, a white dwarf, and a red dwarf.'
+                    },
+                    {
+                        id: 'altair',
+                        name: 'Altair',
+                        distanceLY: 16.73,
+                        displayDist: '16.73 ly',
+                        angleDeg: 297,
+                        constellation: 'Aquila',
+                        spectral: 'A7 V White Main-Sequence',
+                        color: '#bae6fd',
+                        radius: 5.5,
+                        priority: 1,
+                        desc: 'Rotates so rapidly (once every 9 hours) that centrifugal force flattens it into an oblate spheroid.'
+                    },
+                    {
+                        id: 'sigma_draconis',
+                        name: 'Sigma Draconis',
+                        distanceLY: 18.80,
+                        displayDist: '18.80 ly',
+                        angleDeg: 293,
+                        constellation: 'Draco',
+                        spectral: 'K0 V Orange Main-Sequence',
+                        color: '#fdba74',
+                        radius: 4.5,
+                        priority: 3,
+                        desc: 'A stable, slightly cooler K-type main-sequence star in the northern constellation Draco.'
+                    },
+                    {
+                        id: 'eta_cassiopeiae',
+                        name: 'Achird (Eta Cassiopeiae A)',
+                        distanceLY: 19.40,
+                        displayDist: '19.40 ly',
+                        angleDeg: 12,
+                        constellation: 'Cassiopeia',
+                        spectral: 'G0 V Yellow Main-Sequence',
+                        color: '#fef08a',
+                        radius: 5,
+                        priority: 2,
+                        desc: 'Primary star of a binary system in Cassiopeia with mass and temperature remarkably similar to the Sun.'
+                    },
+                    {
+                        id: 'delta_pavonis',
+                        name: 'Delta Pavonis',
+                        distanceLY: 19.90,
+                        displayDist: '19.90 ly',
+                        angleDeg: 300,
+                        constellation: 'Pavo',
+                        spectral: 'G8 IV Yellow Subgiant',
+                        color: '#fde047',
+                        radius: 5,
+                        priority: 2,
+                        desc: 'A nearby solar analog beginning its evolution off the main sequence into a yellow subgiant.'
+                    },
+                    {
+                        id: 'gliese581',
+                        name: 'Gliese 581',
+                        distanceLY: 20.55,
+                        displayDist: '20.55 ly',
+                        angleDeg: 229,
+                        constellation: 'Libra',
+                        spectral: 'M3 V Red Dwarf',
+                        color: '#fb7185',
+                        radius: 4.5,
+                        priority: 2,
+                        desc: 'Target of the 2008 "A Message From Earth" high-power interstellar digital radio transmission.'
+                    },
+                    {
+                        id: 'vega',
+                        name: 'Vega',
+                        distanceLY: 25.04,
+                        displayDist: '25.04 ly',
+                        angleDeg: 279,
+                        constellation: 'Lyra',
+                        spectral: 'A0 V White Main-Sequence',
+                        color: '#7dd3fc',
+                        radius: 6,
+                        priority: 1,
+                        desc: 'One of the brightest stars in the northern summer sky; will become Earth’s North Star around 13,727 AD.'
+                    },
+                    {
+                        id: 'fomalhaut',
+                        name: 'Fomalhaut',
+                        distanceLY: 25.13,
+                        displayDist: '25.13 ly',
+                        angleDeg: 348,
+                        constellation: 'Piscis Austrinus',
+                        spectral: 'A3 V White Main-Sequence',
+                        color: '#e0f2fe',
+                        radius: 5.5,
+                        priority: 1,
+                        desc: 'Surrounded by a dramatic, sharply defined icy debris ring imaged directly by Hubble and JWST.'
+                    },
+                    {
+                        id: 'tabit',
+                        name: 'Tabit (Pi³ Orionis)',
+                        distanceLY: 26.30,
+                        displayDist: '26.30 ly',
+                        angleDeg: 72,
+                        constellation: 'Orion',
+                        spectral: 'F6 V Yellow-White Main-Sequence',
+                        color: '#fef9c3',
+                        radius: 4.8,
+                        priority: 2,
+                        desc: 'The brightest star in Orion’s shield, an F-type main-sequence star hotter and brighter than our Sun.'
+                    },
+                    {
+                        id: 'mu_herculis',
+                        name: 'Mu Herculis',
+                        distanceLY: 27.10,
+                        displayDist: '27.10 ly',
+                        angleDeg: 266,
+                        constellation: 'Hercules',
+                        spectral: 'G5 IV Yellow Subgiant',
+                        color: '#fde047',
+                        radius: 4.8,
+                        priority: 3,
+                        desc: 'Bright yellow subgiant primary component of a quadruple star system in Hercules.'
+                    },
+                    {
+                        id: 'chara',
+                        name: 'Chara (Beta Canum Venaticorum)',
+                        distanceLY: 27.50,
+                        displayDist: '27.50 ly',
+                        angleDeg: 189,
+                        constellation: 'Canes Venatici',
+                        spectral: 'G0 V Yellow Main-Sequence',
+                        color: '#fef08a',
+                        radius: 4.8,
+                        priority: 3,
+                        desc: 'A close solar twin considered a prime target in astrobiology and habitable-world searches.'
+                    },
+                    {
+                        id: 'chi1_orionis',
+                        name: 'Chi¹ Orionis',
+                        distanceLY: 28.30,
+                        displayDist: '28.30 ly',
+                        angleDeg: 89,
+                        constellation: 'Orion',
+                        spectral: 'G0 V Yellow Main-Sequence',
+                        color: '#fef08a',
+                        radius: 4.8,
+                        priority: 2,
+                        desc: 'A Sun-like G0 V star located at the tip of Orion’s club, orbited by a faint red dwarf companion.'
+                    },
+                    {
+                        id: 'gamma_leporis',
+                        name: 'Gamma Leporis',
+                        distanceLY: 29.30,
+                        displayDist: '29.30 ly',
+                        angleDeg: 86,
+                        constellation: 'Lepus',
+                        spectral: 'F6 V Yellow-White Main-Sequence',
+                        color: '#fef9c3',
+                        radius: 4.8,
+                        priority: 3,
+                        desc: 'A bright yellow-white F-type main-sequence star situated just south of Orion.'
+                    },
+                    {
+                        id: 'beta_comae',
+                        name: 'Beta Comae Berenices',
+                        distanceLY: 29.80,
+                        displayDist: '29.80 ly',
+                        angleDeg: 198,
+                        constellation: 'Coma Berenices',
+                        spectral: 'G0 V Yellow Main-Sequence',
+                        color: '#fef08a',
+                        radius: 4.8,
+                        priority: 2,
+                        desc: 'Slightly larger and more luminous than the Sun; the brightest star in Coma Berenices.'
+                    },
+                    {
+                        id: 'pollux',
+                        name: 'Pollux (Beta Geminorum)',
+                        distanceLY: 33.80,
+                        displayDist: '33.80 ly',
+                        angleDeg: 116,
+                        constellation: 'Gemini',
+                        spectral: 'K0 III Orange Giant',
+                        color: '#fb923c',
+                        radius: 6,
+                        priority: 1,
+                        desc: 'The brightest star in Gemini and the closest giant star to the Sun, hosting exoplanet Thestias.'
+                    },
+                    {
+                        id: 'delta_trianguli',
+                        name: 'Delta Trianguli',
+                        distanceLY: 35.40,
+                        displayDist: '35.40 ly',
+                        angleDeg: 34,
+                        constellation: 'Triangulum',
+                        spectral: 'G0.5 V Yellow Main-Sequence',
+                        color: '#fef08a',
+                        radius: 4.6,
+                        priority: 3,
+                        desc: 'A close spectroscopic binary system of two Sun-like stars orbiting each other every 10 days.'
+                    },
+                    {
+                        id: 'zavijava',
+                        name: 'Zavijava (Beta Virginis)',
+                        distanceLY: 35.60,
+                        displayDist: '35.60 ly',
+                        angleDeg: 178,
+                        constellation: 'Virgo',
+                        spectral: 'F9 V Yellow-White Main-Sequence',
+                        color: '#fef9c3',
+                        radius: 4.8,
+                        priority: 2,
+                        desc: 'An F9 V main-sequence star in Virgo slightly hotter and more massive than our Sun.'
+                    },
+                    {
+                        id: 'denebola',
+                        name: 'Denebola (Beta Leonis)',
+                        distanceLY: 35.90,
+                        displayDist: '35.90 ly',
+                        angleDeg: 177,
+                        constellation: 'Leo',
+                        spectral: 'A3 V White Main-Sequence',
+                        color: '#e0f2fe',
+                        radius: 5.5,
+                        priority: 1,
+                        desc: 'Marks the tail of Leo the Lion; a bright white A-type star surrounded by a warm dust disk.'
+                    },
+                    {
+                        id: 'arcturus',
+                        name: 'Arcturus (Alpha Boötis)',
+                        distanceLY: 36.70,
+                        displayDist: '36.70 ly',
+                        angleDeg: 213,
+                        constellation: 'Boötes',
+                        spectral: 'K1.5 III Red Giant',
+                        color: '#f97316',
+                        radius: 6.8,
+                        priority: 1,
+                        desc: 'The brightest star in the northern celestial hemisphere—a massive red giant 25 times wider than the Sun.'
+                    },
+                    {
+                        id: 'zeta_doradus',
+                        name: 'Zeta Doradus',
+                        distanceLY: 38.00,
+                        displayDist: '38.00 ly',
+                        angleDeg: 77,
+                        constellation: 'Dorado',
+                        spectral: 'F7 V Yellow-White Main-Sequence',
+                        color: '#fef9c3',
+                        radius: 4.6,
+                        priority: 3,
+                        desc: 'A magnetically active F-type main-sequence star in the southern constellation Dorado.'
+                    },
+                    {
+                        id: 'porrima_a',
+                        name: 'Porrima A (Gamma Virginis A)',
+                        distanceLY: 38.10,
+                        displayDist: '38.10 ly',
+                        angleDeg: 190,
+                        constellation: 'Virgo',
+                        spectral: 'F0 V Yellow-White Main-Sequence',
+                        color: '#fef9c3',
+                        radius: 5,
+                        priority: 2,
+                        desc: 'Primary component of the famous Porrima binary system, orbiting its twin every 169 years.'
+                    },
+                    {
+                        id: 'porrima_b',
+                        name: 'Porrima B (Gamma Virginis B)',
+                        distanceLY: 38.10,
+                        displayDist: '38.10 ly',
+                        angleDeg: 192.5,
+                        constellation: 'Virgo',
+                        spectral: 'F0 V Yellow-White Main-Sequence',
+                        color: '#fef9c3',
+                        radius: 5,
+                        priority: 3,
+                        desc: 'Nearly identical F0 V twin companion to Porrima A in the constellation Virgo.'
+                    },
+                    {
+                        id: 'iota_pegasi',
+                        name: 'Iota Pegasi',
+                        distanceLY: 38.30,
+                        displayDist: '38.30 ly',
+                        angleDeg: 332,
+                        constellation: 'Pegasus',
+                        spectral: 'F5 V Yellow-White Main-Sequence',
+                        color: '#fef9c3',
+                        radius: 4.6,
+                        priority: 3,
+                        desc: 'A close spectroscopic binary in Pegasus with an orbital period of just 10.2 days.'
+                    },
+                    {
+                        id: 'lambda_serpentis',
+                        name: 'Lambda Serpentis',
+                        distanceLY: 38.90,
+                        displayDist: '38.90 ly',
+                        angleDeg: 237,
+                        constellation: 'Serpens',
+                        spectral: 'G0 V Yellow Main-Sequence',
+                        color: '#fef08a',
+                        radius: 4.6,
+                        priority: 3,
+                        desc: 'A nearby G0 V solar analog roughly twice as luminous as the Sun.'
+                    },
+                    {
+                        id: 'beta_tri_aus',
+                        name: 'Beta Trianguli Australis',
+                        distanceLY: 40.40,
+                        displayDist: '40.40 ly',
+                        angleDeg: 238,
+                        constellation: 'Triangulum Australe',
+                        spectral: 'F1 V Yellow-White Main-Sequence',
+                        color: '#fef9c3',
+                        radius: 5,
+                        priority: 2,
+                        desc: 'A bright southern F-type star showing infrared excess from a circumstellar debris disk.'
+                    },
+                    {
+                        id: 'trappist1',
+                        name: 'TRAPPIST-1',
+                        distanceLY: 40.66,
+                        displayDist: '40.66 ly',
+                        angleDeg: 346,
+                        constellation: 'Aquarius',
+                        spectral: 'M8 V Ultra-Cool Dwarf',
+                        color: '#f43f5e',
+                        radius: 5,
+                        priority: 1,
+                        desc: 'Legendary system hosting seven temperate, Earth-sized rocky planets—several within the habitable zone!'
+                    },
+                    {
+                        id: 'cancri55',
+                        name: '55 Cancri',
+                        distanceLY: 41.06,
+                        displayDist: '41.06 ly',
+                        angleDeg: 133,
+                        constellation: 'Cancer',
+                        spectral: 'G8 V + M4 V Binary System',
+                        color: '#fde047',
+                        radius: 5,
+                        priority: 2,
+                        desc: 'A five-planet system including 55 Cancri e, an ultra-hot, carbon-rich rocky super-Earth.'
+                    },
+                    {
+                        id: 'capella_aa',
+                        name: 'Capella Aa (Alpha Aurigae Aa)',
+                        distanceLY: 42.90,
+                        displayDist: '42.90 ly',
+                        angleDeg: 79,
+                        constellation: 'Auriga',
+                        spectral: 'G8 III Yellow Giant',
+                        color: '#fde047',
+                        radius: 6,
+                        priority: 1,
+                        desc: 'Primary giant component of the 6th brightest star system in the sky, about 12 times wider than the Sun.'
+                    },
+                    {
+                        id: 'capella_ab',
+                        name: 'Capella Ab (Alpha Aurigae Ab)',
+                        distanceLY: 42.90,
+                        displayDist: '42.90 ly',
+                        angleDeg: 81.5,
+                        constellation: 'Auriga',
+                        spectral: 'G1 III Yellow Giant',
+                        color: '#fef08a',
+                        radius: 5.5,
+                        priority: 3,
+                        desc: 'Companion yellow giant locked in a tight 104-day circular orbit with Capella Aa.'
+                    },
+                    {
+                        id: 'titawin',
+                        name: 'Titawin (Upsilon Andromedae A)',
+                        distanceLY: 44.00,
+                        displayDist: '44.00 ly',
+                        angleDeg: 24,
+                        constellation: 'Andromeda',
+                        spectral: 'F8 V Yellow-White Main-Sequence',
+                        color: '#fef9c3',
+                        radius: 5,
+                        priority: 2,
+                        desc: 'The first main-sequence star discovered to host a multi-planet system (four known exoplanets).'
+                    },
+                    {
+                        id: 'errai',
+                        name: 'Errai (Gamma Cephei A)',
+                        distanceLY: 45.00,
+                        displayDist: '45.00 ly',
+                        angleDeg: 356,
+                        constellation: 'Cepheus',
+                        spectral: 'K1 IV Orange Subgiant',
+                        color: '#fdba74',
+                        radius: 5.2,
+                        priority: 2,
+                        desc: 'Due to Earth’s axial precession, Errai will become our North Pole Star between 3000 and 5200 AD.'
+                    },
+                    {
+                        id: 'ursae_maj_47',
+                        name: '47 Ursae Majoris (Chalawan)',
+                        distanceLY: 45.30,
+                        displayDist: '45.30 ly',
+                        angleDeg: 164,
+                        constellation: 'Ursa Major',
+                        spectral: 'G1 V Yellow Main-Sequence',
+                        color: '#fef08a',
+                        radius: 4.8,
+                        priority: 3,
+                        desc: 'A Sun-like star in the Big Dipper / Ursa Major orbited by three gas giant planets.'
+                    },
+                    {
+                        id: 'theta_bootis',
+                        name: 'Theta Boötis (Asellus Primus)',
+                        distanceLY: 47.50,
+                        displayDist: '47.50 ly',
+                        angleDeg: 216,
+                        constellation: 'Boötes',
+                        spectral: 'F7 V Yellow-White Main-Sequence',
+                        color: '#fef9c3',
+                        radius: 4.6,
+                        priority: 3,
+                        desc: 'A yellow-white F-type main-sequence star marking the northern tip of Boötes.'
+                    },
+                    {
+                        id: 'nu2_lupi',
+                        name: 'Nu² Lupi',
+                        distanceLY: 47.50,
+                        displayDist: '47.50 ly',
+                        angleDeg: 231,
+                        constellation: 'Lupus',
+                        spectral: 'G4 V Yellow Main-Sequence',
+                        color: '#fef08a',
+                        radius: 4.6,
+                        priority: 3,
+                        desc: 'A bright Sun-like star orbited by three transiting exoplanets studied by ESA’s CHEOPS telescope.'
+                    },
+                    {
+                        id: 'rasalhague',
+                        name: 'Rasalhague (Alpha Ophiuchi)',
+                        distanceLY: 48.60,
+                        displayDist: '48.60 ly',
+                        angleDeg: 264,
+                        constellation: 'Ophiuchus',
+                        spectral: 'A5 IV White Subgiant',
+                        color: '#e0f2fe',
+                        radius: 5.5,
+                        priority: 2,
+                        desc: 'Brightest star in Ophiuchus; a fast-rotating white subgiant bulging at its equator.'
+                    },
+                    // --- DISTANT GIANT STARS (> 50 ly) ---
+                    {
+                        id: 'aldebaran',
+                        name: 'Aldebaran',
+                        distanceLY: 65.30,
+                        displayDist: '65.30 ly',
+                        angleDeg: 68,
+                        constellation: 'Taurus',
+                        spectral: 'K5 III Orange Giant',
+                        color: '#f97316',
+                        radius: 6.5,
+                        priority: 1,
+                        desc: 'The fiery red eye of Taurus the Bull, swollen to roughly 44 times the diameter of our Sun.'
+                    },
+                    {
+                        id: 'betelgeuse',
+                        name: 'Betelgeuse',
+                        distanceLY: 548.0,
+                        displayDist: '548.0 ly',
+                        angleDeg: 88,
+                        constellation: 'Orion',
+                        spectral: 'M1-M2 Red Supergiant',
+                        color: '#ef4444',
+                        radius: 7.5,
+                        priority: 1,
+                        desc: 'A massive red supergiant nearing the end of its life; if placed at the Sun’s center, it would engulf Jupiter’s orbit.'
+                    }
+                ];
+            }
+
+            /**
+             * Generates background decorative starfield
+             */
+            function generateBackgroundStars(count) {
+                state.bgStars = [];
+                for (let i = 0; i < count; i++) {
+                    state.bgStars.push({
+                        x: Math.random(),
+                        y: Math.random(),
+                        size: Math.random() * 1.4 + 0.3,
+                        alpha: Math.random() * 0.65 + 0.15,
+                        twinkleSpeed: Math.random() * 0.002 + 0.0005,
+                        phase: Math.random() * Math.PI * 2
+                    });
+                }
+            }
+
+            /**
+             * Logarithmic Zoom Slider conversion (0..100 -> MIN_ZOOM_LY .. MAX_ZOOM_LY)
+             */
+            function setZoomFromSlider(sliderVal) {
+                const clamped = Math.max(0, Math.min(100, sliderVal));
+                const minLog = Math.log10(MIN_ZOOM_LY);
+                const maxLog = Math.log10(MAX_ZOOM_LY);
+                const scale = minLog + (clamped / 100) * (maxLog - minLog);
+                state.maxRadiusLY = Math.pow(10, scale);
+                updateZoomLabel();
+            }
+
+            /**
+             * Sets Zoom Slider and radar scale from a target Light-Year value
+             */
+            function setZoomByLY(targetLY) {
+                const clampedLY = Math.max(MIN_ZOOM_LY, Math.min(MAX_ZOOM_LY, targetLY));
+                state.maxRadiusLY = clampedLY;
+                const minLog = Math.log10(MIN_ZOOM_LY);
+                const maxLog = Math.log10(MAX_ZOOM_LY);
+                const sliderVal = ((Math.log10(clampedLY) - minLog) / (maxLog - minLog)) * 100;
+                zoomSlider.value = Math.max(0, Math.min(100, sliderVal));
+                updateZoomLabel();
+            }
+
+            function updateZoomLabel() {
+                if (state.maxRadiusLY < 0.02) {
+                    const auVal = state.maxRadiusLY * AU_PER_LIGHT_YEAR;
+                    const lightHours = (state.maxRadiusLY * SECONDS_PER_JULIAN_YEAR) / 3600;
+                    zoomLabel.textContent = `${auVal.toFixed(0)} AU (${lightHours.toFixed(1)} Light-Hours)`;
+                } else if (state.maxRadiusLY < 1) {
+                    zoomLabel.textContent = `${state.maxRadiusLY.toFixed(2)} Light-Years`;
+                } else {
+                    zoomLabel.textContent = `${state.maxRadiusLY.toFixed(1)} Light-Years`;
+                }
+            }
+
+            /**
+             * Focuses radar on a specific star or probe
+             */
+            function focusOnTarget(target) {
+                if (!target) return;
+                state.selectedStarId = target.id;
+                setZoomByLY(target.distanceLY * 1.35);
+                updateStarCard();
+            }
+
+            /**
+             * Populates bottom star and probe catalog chips based on search & filter
+             */
+            function renderStarChips() {
+                const metrics = getCurrentMetrics();
+                const targets = getCosmicTargets(metrics.currentSimMs);
+                catalogTotalLabel.textContent = targets.length;
+
+                const query = state.catalogSearch.trim().toLowerCase();
+                const filterMode = state.catalogFilter;
+
+                const filtered = targets.filter((star) => {
+                    const isPassed = metrics.distanceLY >= star.distanceLY;
+                    if (filterMode === 'passed' && !isPassed) return false;
+                    if (filterMode === 'upcoming' && isPassed) return false;
+                    if (filterMode === '10to50' && (star.distanceLY < 10 || star.distanceLY > 50)) return false;
+
+                    if (query) {
+                        const haystack = `${star.name} ${star.spectral} ${star.constellation}`.toLowerCase();
+                        return haystack.includes(query);
+                    }
+                    return true;
+                });
+
+                starChipsContainer.innerHTML = '';
+
+                if (filtered.length === 0) {
+                    const emptyMsg = document.createElement('div');
+                    emptyMsg.className = 'text-xs text-slate-400 py-2 px-1';
+                    emptyMsg.textContent = 'No celestial objects match your search.';
+                    starChipsContainer.appendChild(emptyMsg);
+                    return;
+                }
+
+                filtered.forEach((star) => {
+                    const isPassed = metrics.distanceLY >= star.distanceLY;
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.dataset.starId = star.id;
+                    btn.className = `star-chip shrink-0 px-3 py-1.5 rounded-xl bg-space-950/90 hover:bg-sky-500/15 border ${isPassed ? 'border-amber-500/40 bg-amber-500/5' : 'border-slate-800'} hover:border-sky-400/50 text-left transition flex items-center gap-2`;
+
+                    const markerHtml = star.isProbe
+                        ? `<span class="w-2.5 h-2.5 rotate-45 shrink-0 border border-white/80" style="background-color: ${star.color}"></span>`
+                        : `<span class="w-2 h-2 rounded-full shrink-0" style="background-color: ${star.color}"></span>`;
+
+                    btn.innerHTML = `
+                        ${markerHtml}
+                        <div>
+                            <div class="text-xs font-medium text-slate-200 leading-tight">${star.name}</div>
+                            <div class="text-[10px] font-mono text-slate-400">${star.displayDist}</div>
+                        </div>
+                    `;
+
+                    btn.addEventListener('click', () => {
+                        const latestMetrics = getCurrentMetrics();
+                        const currentTargets = getCosmicTargets(latestMetrics.currentSimMs);
+                        const freshTarget = currentTargets.find((t) => t.id === star.id) || star;
+                        focusOnTarget(freshTarget);
+                    });
+
+                    starChipsContainer.appendChild(btn);
+                });
+            }
+
+            /**
+             * Computes current simulation time and cosmic distance metrics
+             */
+            function getCurrentMetrics() {
+                const currentSimMs = state.isLive ? Date.now() : state.targetTimestamp;
+                const birthMs = Number.isFinite(state.birthTimestamp) ? state.birthTimestamp : new Date(DEFAULT_BIRTH_STR).getTime();
+
+                const elapsedSeconds = Math.max(0, (currentSimMs - birthMs) / 1000);
+                const distanceLY = elapsedSeconds / SECONDS_PER_JULIAN_YEAR;
+                const distanceKm = elapsedSeconds * SPEED_OF_LIGHT_KMPS;
+                const distanceAU = distanceKm / KM_PER_AU;
+
+                // 1901 First Radio Wave distance
+                const radioElapsedSec = Math.max(0, (currentSimMs - FIRST_RADIO_BROADCAST_MS) / 1000);
+                const radioDistanceLY = radioElapsedSec / SECONDS_PER_JULIAN_YEAR;
+
+                return {
+                    currentSimMs,
+                    birthMs,
+                    elapsedSeconds,
+                    distanceLY,
+                    distanceKm,
+                    distanceAU,
+                    radioDistanceLY
+                };
+            }
+
+            /**
+             * Switches between Live Mode and Target Date Mode
+             */
+            function setLiveMode(enableLive, customTargetMs = null) {
+                state.isLive = enableLive;
+                if (enableLive) {
+                    state.targetTimestamp = Date.now();
+                    liveToggleBtn.className = 'text-[11px] px-2.5 py-1 rounded-md bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-medium transition';
+                    liveToggleBtn.textContent = 'Live (Now)';
+                    simModeBadge.classList.add('hidden');
+                    liveBadge.classList.remove('hidden');
+                } else {
+                    if (customTargetMs !== null && Number.isFinite(customTargetMs)) {
+                        state.targetTimestamp = customTargetMs;
+                    }
+                    targetDateInput.value = toLocalDatetimeInputString(new Date(state.targetTimestamp));
+                    liveToggleBtn.className = 'text-[11px] px-2.5 py-1 rounded-md bg-slate-800 hover:bg-emerald-500/20 border border-slate-700 hover:border-emerald-500/40 text-slate-300 hover:text-emerald-300 font-medium transition';
+                    liveToggleBtn.textContent = 'Return to Live';
+                    simModeBadge.classList.remove('hidden');
+                    liveBadge.classList.add('hidden');
+                }
+                renderStarChips();
+            }
+
+            /**
+             * Updates the selected star or probe telemetry card
+             */
+            function updateStarCard() {
+                if (!state.selectedStarId) {
+                    starCard.classList.add('hidden');
+                    return;
+                }
+
+                const { distanceLY, currentSimMs, birthMs } = getCurrentMetrics();
+                const targets = getCosmicTargets(currentSimMs);
+                const star = targets.find((t) => t.id === state.selectedStarId);
+
+                if (!star) {
+                    starCard.classList.add('hidden');
+                    return;
+                }
+
+                const isPassed = distanceLY >= star.distanceLY;
+
+                starCard.classList.remove('hidden');
+                document.getElementById('cardStarName').textContent = star.name;
+                document.getElementById('cardStarMeta').textContent = `${star.constellation} • ${star.spectral}`;
+                document.getElementById('cardDistance').textContent = star.displayDist;
+                document.getElementById('cardDescription').textContent = star.desc;
+
+                const badge = document.getElementById('cardStatusBadge');
+                const arrivalLabel = document.getElementById('cardArrivalLabel');
+                const arrivalDateEl = document.getElementById('cardArrivalDate');
+
+                const arrivalTimestamp = birthMs + star.distanceLY * SECONDS_PER_JULIAN_YEAR * 1000;
+                arrivalDateEl.textContent = formatEnglishDateTime(arrivalTimestamp);
+
+                if (isPassed) {
+                    badge.textContent = 'Passed ✓';
+                    badge.className = 'text-[10px] px-2 py-0.5 rounded-full font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40';
+                    arrivalLabel.textContent = 'Reached on';
+                } else {
+                    const remainingYears = star.distanceLY - distanceLY;
+                    badge.textContent = remainingYears < 0.01 ? 'Upcoming (Soon)' : `Upcoming (${remainingYears.toFixed(1)} yr)`;
+                    badge.className = 'text-[10px] px-2 py-0.5 rounded-full font-semibold bg-amber-500/15 text-amber-300 border border-amber-500/40';
+                    arrivalLabel.textContent = 'Will reach on';
+                }
+            }
+
+            /**
+             * Canvas sizing (Retina / HiDPI aware)
+             */
+            function resizeCanvas() {
+                const rect = canvasContainer.getBoundingClientRect();
+                if (rect.width <= 0 || rect.height <= 0) return;
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = Math.round(rect.width * dpr);
+                canvas.height = Math.round(rect.height * dpr);
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            }
+
+            /**
+             * Main 2D Radar Render Loop (60 FPS)
+             */
+            function renderFrame(timestamp) {
+                const rect = canvasContainer.getBoundingClientRect();
+                const width = rect.width;
+                const height = rect.height;
+
+                if (width <= 0 || height <= 0) {
+                    requestAnimationFrame(renderFrame);
+                    return;
+                }
+
+                const cx = width / 2;
+                const cy = height / 2;
+                const maxPixelRadius = Math.min(width, height) * 0.44;
+
+                const metrics = getCurrentMetrics();
+                const { distanceLY, distanceKm, distanceAU, elapsedSeconds, currentSimMs, radioDistanceLY } = metrics;
+                const currentTargets = getCosmicTargets(currentSimMs);
+
+                // Update Telemetry Readouts
+                lyValueEl.textContent = distanceLY.toFixed(8);
+                kmValueEl.textContent = Math.round(distanceKm).toLocaleString('en-US') + ' km';
+                auValueEl.textContent = distanceAU.toLocaleString('en-US', { maximumFractionDigits: 1 }) + ' AU';
+                secValueEl.textContent = Math.floor(elapsedSeconds).toLocaleString('en-US') + ' sec';
+                radioRingDistText.textContent = `Marconi Transatlantic Signal • ${radioDistanceLY.toFixed(2)} Light-Years`;
+
+                // Sync Time-Travel Slider when user is not actively dragging it
+                if (document.activeElement !== timeTravelSlider) {
+                    const clampedSliderYears = Math.max(0, Math.min(600, distanceLY));
+                    timeTravelSlider.value = clampedSliderYears;
+                }
+
+                if (state.isLive) {
+                    simDateDisplayEl.textContent = 'Observation Time: Live (Now)';
+                    simDateDisplayEl.className = 'text-[11px] font-mono text-slate-400 mt-1';
+                    timeTravelLabel.textContent = `Live (${distanceLY.toFixed(1)} yr)`;
+                    if (document.activeElement !== targetDateInput) {
+                        targetDateInput.value = toLocalDatetimeInputString(new Date(currentSimMs));
+                    }
+                } else {
+                    simDateDisplayEl.textContent = `Target Date: ${formatEnglishDateTime(currentSimMs)}`;
+                    simDateDisplayEl.className = 'text-[11px] font-mono text-amber-300 mt-1';
+                    timeTravelLabel.textContent = `+${distanceLY.toFixed(1)} yr`;
+                }
+
+                // 1. Clear Background and Draw Space Gradient
+                ctx.clearRect(0, 0, width, height);
+                const bgGrad = ctx.createRadialGradient(cx, cy, 5, cx, cy, Math.max(width, height) * 0.75);
+                bgGrad.addColorStop(0, '#0b142c');
+                bgGrad.addColorStop(0.55, '#060a17');
+                bgGrad.addColorStop(1, '#03050b');
+                ctx.fillStyle = bgGrad;
+                ctx.fillRect(0, 0, width, height);
+
+                // 2. Background Starfield (Twinkling effect)
+                state.bgStars.forEach((s) => {
+                    const twinkle = 0.65 + 0.35 * Math.sin(timestamp * s.twinkleSpeed + s.phase);
+                    ctx.fillStyle = `rgba(226, 232, 240, ${s.alpha * twinkle})`;
+                    ctx.beginPath();
+                    ctx.arc(s.x * width, s.y * height, s.size, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+
+                // 3. Concentric Radar Range Rings & Axis Lines
+                const ringCount = 4;
+                ctx.lineWidth = 1;
+                ctx.font = '500 10px "JetBrains Mono", monospace';
+                ctx.textAlign = 'left';
+
+                for (let i = 1; i <= ringCount; i++) {
+                    const ratio = i / ringCount;
+                    const rPx = maxPixelRadius * ratio;
+                    const rLY = state.maxRadiusLY * ratio;
+
+                    ctx.strokeStyle = i === ringCount ? 'rgba(56, 189, 248, 0.24)' : 'rgba(56, 189, 248, 0.11)';
+                    ctx.beginPath();
+                    ctx.arc(cx, cy, rPx, 0, Math.PI * 2);
+                    ctx.stroke();
+
+                    let ringLabel = '';
+                    if (rLY < 0.02) {
+                        const auVal = rLY * AU_PER_LIGHT_YEAR;
+                        ringLabel = `${auVal.toFixed(0)} AU`;
+                    } else if (rLY < 1) {
+                        ringLabel = `${rLY.toFixed(2)} ly`;
+                    } else {
+                        ringLabel = `${rLY.toFixed(1)} ly`;
+                    }
+
+                    ctx.fillStyle = 'rgba(148, 163, 184, 0.6)';
+                    ctx.fillText(ringLabel, cx + 6, cy - rPx + 12);
+                }
+
+                // Crosshair Axis Lines
+                ctx.strokeStyle = 'rgba(56, 189, 248, 0.08)';
+                ctx.beginPath();
+                ctx.moveTo(cx - maxPixelRadius, cy);
+                ctx.lineTo(cx + maxPixelRadius, cy);
+                ctx.moveTo(cx, cy - maxPixelRadius);
+                ctx.lineTo(cx, cy + maxPixelRadius);
+                ctx.stroke();
+
+                // 4. 1901 First Radio Wave Ring (Toggleable)
+                if (state.showRadioRing && radioDistanceLY > 0) {
+                    const radioPixelRadius = (radioDistanceLY / state.maxRadiusLY) * maxPixelRadius;
+                    if (radioPixelRadius > 6 && radioPixelRadius <= Math.max(width, height) * 1.2) {
+                        ctx.save();
+                        ctx.strokeStyle = 'rgba(232, 121, 249, 0.75)';
+                        ctx.lineWidth = 1.8;
+                        ctx.setLineDash([7, 5]);
+                        ctx.shadowColor = '#e879f9';
+                        ctx.shadowBlur = 10;
+                        ctx.beginPath();
+                        ctx.arc(cx, cy, radioPixelRadius, 0, Math.PI * 2);
+                        ctx.stroke();
+                        ctx.restore();
+
+                        if (radioPixelRadius > 45 && radioPixelRadius < maxPixelRadius * 1.15) {
+                            ctx.fillStyle = '#f0abfc';
+                            ctx.font = '600 10px "Inter", sans-serif';
+                            ctx.textAlign = 'left';
+                            ctx.fillText(
+                                `1901 First Radio Wave (${radioDistanceLY.toFixed(1)} ly)`,
+                                cx + radioPixelRadius * 0.707 + 6,
+                                cy + radioPixelRadius * 0.707 + 4
+                            );
+                        }
+                    }
+                }
+
+                // 5. User's Expanding Light Horizon Sphere
+                if (distanceLY > 0) {
+                    const horizonPixelRadius = (distanceLY / state.maxRadiusLY) * maxPixelRadius;
+                    const drawRadius = Math.min(horizonPixelRadius, Math.max(width, height) * 1.25);
+
+                    const horizonGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, drawRadius);
+                    horizonGrad.addColorStop(0, 'rgba(56, 189, 248, 0.04)');
+                    horizonGrad.addColorStop(0.75, 'rgba(56, 189, 248, 0.12)');
+                    horizonGrad.addColorStop(1, 'rgba(56, 189, 248, 0.28)');
+
+                    ctx.fillStyle = horizonGrad;
+                    ctx.beginPath();
+                    ctx.arc(cx, cy, drawRadius, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    if (horizonPixelRadius <= Math.max(width, height) * 1.2) {
+                        ctx.save();
+                        ctx.strokeStyle = '#38bdf8';
+                        ctx.lineWidth = 2.2;
+                        ctx.shadowColor = '#38bdf8';
+                        ctx.shadowBlur = 14;
+                        ctx.beginPath();
+                        ctx.arc(cx, cy, horizonPixelRadius, 0, Math.PI * 2);
+                        ctx.stroke();
+                        ctx.restore();
+                    }
+                }
+
+                // 6. Center Point (Earth / Origin)
+                ctx.save();
+                ctx.fillStyle = '#38bdf8';
+                ctx.shadowColor = '#38bdf8';
+                ctx.shadowBlur = 12;
+                ctx.beginPath();
+                ctx.arc(cx, cy, 4.5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+
+                ctx.fillStyle = '#ffffff';
+                ctx.font = '600 11px "Inter", sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('Earth (You)', cx, cy + 16);
+
+                // 7. Render Stars & Space Probes (With Smart Anti-Overlap Label Placement)
+                state.starScreenCoords = [];
+                const placedLabelBoxes = [
+                    { x: cx - 42, y: cy - 10, w: 84, h: 30 } // Center label exclusion box
+                ];
+                let passedCounter = 0;
+
+                currentTargets.forEach((star) => {
+                    const isPassed = distanceLY >= star.distanceLY;
+                    if (isPassed) passedCounter++;
+
+                    const rPx = (star.distanceLY / state.maxRadiusLY) * maxPixelRadius;
+                    if (rPx < 8 || rPx > Math.max(width, height) * 0.95) return;
+
+                    const rad = (star.angleDeg * Math.PI) / 180;
+                    const sx = cx + Math.cos(rad) * rPx;
+                    const sy = cy - Math.sin(rad) * rPx;
+
+                    state.starScreenCoords.push({
+                        star,
+                        x: sx,
+                        y: sy,
+                        hitRadius: Math.max(13, star.radius + 7)
+                    });
+
+                    const isSelected = state.selectedStarId === star.id;
+                    const isHovered = state.hoveredStarId === star.id;
+
+                    // Halo for passed objects
+                    if (isPassed) {
+                        ctx.fillStyle = star.isProbe ? 'rgba(34, 211, 238, 0.25)' : 'rgba(251, 191, 36, 0.22)';
+                        ctx.beginPath();
+                        ctx.arc(sx, sy, star.radius + 4.5, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+
+                    // Selection or Hover ring
+                    if (isSelected || isHovered) {
+                        ctx.strokeStyle = isSelected ? '#38bdf8' : '#ffffff';
+                        ctx.lineWidth = 1.5;
+                        ctx.beginPath();
+                        ctx.arc(sx, sy, star.radius + 8, 0, Math.PI * 2);
+                        ctx.stroke();
+                    }
+
+                    // Core Marker (Diamond for space probes, Circle for stars)
+                    if (star.isProbe) {
+                        ctx.save();
+                        ctx.translate(sx, sy);
+                        ctx.rotate(Math.PI / 4);
+                        ctx.fillStyle = star.color;
+                        ctx.shadowColor = star.color;
+                        ctx.shadowBlur = 10;
+                        ctx.fillRect(-star.radius, -star.radius, star.radius * 2, star.radius * 2);
+                        ctx.strokeStyle = '#ffffff';
+                        ctx.lineWidth = 1;
+                        ctx.strokeRect(-star.radius, -star.radius, star.radius * 2, star.radius * 2);
+                        ctx.restore();
+                    } else {
+                        ctx.save();
+                        ctx.fillStyle = isPassed ? star.color : 'rgba(148, 163, 184, 0.68)';
+                        if (isPassed) {
+                            ctx.shadowColor = star.color;
+                            ctx.shadowBlur = 9;
+                        }
+                        ctx.beginPath();
+                        ctx.arc(sx, sy, star.radius, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.restore();
+                    }
+
+                    // Object Label (Short name + Bounding-box collision check)
+                    const shortLabel = star.name.split(' (')[0];
+                    ctx.font = (isSelected || isHovered || isPassed) ? '600 10.5px "Inter", sans-serif' : '400 10px "Inter", sans-serif';
+                    const textWidth = ctx.measureText(shortLabel).width;
+                    const labelX = sx + star.radius + 5;
+                    const labelY = sy - 7;
+                    const box = { x: labelX - 2, y: labelY, w: textWidth + 4, h: 13 };
+
+                    const overlaps = placedLabelBoxes.some((b) =>
+                        box.x < b.x + b.w &&
+                        box.x + box.w > b.x &&
+                        box.y < b.y + b.h &&
+                        box.y + box.h > b.y
+                    );
+
+                    if (isSelected || isHovered || !overlaps) {
+                        placedLabelBoxes.push(box);
+                        ctx.fillStyle = isSelected ? '#38bdf8' : (star.isProbe ? '#a5f3fc' : (isPassed ? '#fef3c7' : '#94a3b8'));
+                        ctx.textAlign = 'left';
+                        ctx.fillText(shortLabel, labelX, sy + 3);
+                    }
+                });
+
+                passedCountEl.textContent = `${passedCounter} / ${currentTargets.length}`;
+
+                // Update Passed styling on bottom catalog chips
+                document.querySelectorAll('.star-chip').forEach((chip) => {
+                    const sId = chip.dataset.starId;
+                    const st = currentTargets.find((item) => item.id === sId);
+                    if (st && distanceLY >= st.distanceLY) {
+                        chip.classList.add('border-amber-500/40', 'bg-amber-500/5');
+                    } else {
+                        chip.classList.remove('border-amber-500/40', 'bg-amber-500/5');
+                    }
+                });
+
+                if (state.selectedStarId) {
+                    updateStarCard();
+                }
+
+                requestAnimationFrame(renderFrame);
+            }
+
+            // --- EVENT LISTENERS ---
+
+            // Birth date change (with invalid date guard)
+            birthInput.addEventListener('change', (e) => {
+                const parsed = new Date(e.target.value);
+                if (!isNaN(parsed.getTime())) {
+                    state.birthTimestamp = parsed.getTime();
+                    renderStarChips();
+                    if (state.selectedStarId) updateStarCard();
+                } else {
+                    birthInput.value = toLocalDatetimeInputString(new Date(state.birthTimestamp));
+                }
+            });
+
+            // Birth date preset buttons
+            document.querySelectorAll('.preset-btn').forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    const preset = btn.dataset.preset;
+                    let targetDate = null;
+
+                    if (preset === 'default2013') {
+                        targetDate = new Date(DEFAULT_BIRTH_STR);
+                    } else if (preset === '2000') {
+                        targetDate = new Date('2000-01-01T00:00:00');
+                    } else if (preset === '1990') {
+                        targetDate = new Date('1990-06-15T12:00:00');
+                    } else if (preset === 'apollo11') {
+                        targetDate = new Date('1969-07-20T23:17:00');
+                    }
+
+                    if (targetDate && !isNaN(targetDate.getTime())) {
+                        birthInput.value = toLocalDatetimeInputString(targetDate);
+                        state.birthTimestamp = targetDate.getTime();
+                        const metrics = getCurrentMetrics();
+                        setZoomByLY(Math.max(5, metrics.distanceLY * 1.25));
+                        state.selectedStarId = null;
+                        starCard.classList.add('hidden');
+                        renderStarChips();
+                    }
+                });
+            });
+
+            // Target simulation date input change
+            targetDateInput.addEventListener('change', (e) => {
+                const parsed = new Date(e.target.value);
+                if (!isNaN(parsed.getTime())) {
+                    setLiveMode(false, parsed.getTime());
+                } else {
+                    targetDateInput.value = toLocalDatetimeInputString(new Date(getCurrentMetrics().currentSimMs));
+                }
+            });
+
+            // Live mode toggle button
+            liveToggleBtn.addEventListener('click', () => {
+                setLiveMode(true);
+            });
+
+            // Quick time-jump buttons ("Now", "+10 Years", "Jan 1 2050", "Jan 1 2100")
+            document.querySelectorAll('.future-btn').forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    const mode = btn.dataset.future;
+                    if (mode === 'now') {
+                        setLiveMode(true);
+                        return;
+                    }
+
+                    const nowMs = Date.now();
+                    let targetMs = nowMs;
+
+                    if (mode === '10y') {
+                        targetMs = nowMs + 10 * SECONDS_PER_JULIAN_YEAR * 1000;
+                    } else if (mode === '2050') {
+                        targetMs = new Date('2050-01-01T00:00:00').getTime();
+                    } else if (mode === '2100') {
+                        targetMs = new Date('2100-01-01T00:00:00').getTime();
+                    }
+
+                    setLiveMode(false, targetMs);
+
+                    const projectedLY = Math.max(0, (targetMs - state.birthTimestamp) / (SECONDS_PER_JULIAN_YEAR * 1000));
+                    if (projectedLY > state.maxRadiusLY * 0.85) {
+                        setZoomByLY(projectedLY * 1.2);
+                    }
+                });
+            });
+
+            // Time-Travel Slider (Scrub elapsed years from birth)
+            timeTravelSlider.addEventListener('input', (e) => {
+                const yearsOffset = parseFloat(e.target.value);
+                if (!isNaN(yearsOffset)) {
+                    const targetMs = state.birthTimestamp + yearsOffset * SECONDS_PER_JULIAN_YEAR * 1000;
+                    setLiveMode(false, targetMs);
+                    if (yearsOffset > state.maxRadiusLY * 0.88) {
+                        setZoomByLY(yearsOffset * 1.15);
+                    }
+                }
+            });
+
+            // Zoom Slider & Quick Scale Buttons
+            zoomSlider.addEventListener('input', (e) => {
+                setZoomFromSlider(parseFloat(e.target.value));
+            });
+
+            document.querySelectorAll('.zoom-preset-btn').forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    const ly = parseFloat(btn.dataset.zoom);
+                    if (!isNaN(ly)) {
+                        setZoomByLY(ly);
+                    }
+                });
+            });
+
+            // Mouse wheel zoom over Canvas
+            canvasContainer.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const currentVal = parseFloat(zoomSlider.value);
+                const delta = e.deltaY > 0 ? 3.5 : -3.5;
+                const nextVal = Math.max(0, Math.min(100, currentVal + delta));
+                zoomSlider.value = nextVal;
+                setZoomFromSlider(nextVal);
+            }, { passive: false });
+
+            // 1901 First Radio Wave Ring Toggle
+            radioRingToggle.addEventListener('change', (e) => {
+                state.showRadioRing = e.target.checked;
+                if (state.showRadioRing) {
+                    legendRadioRow.classList.remove('hidden');
+                } else {
+                    legendRadioRow.classList.add('hidden');
+                }
+            });
+
+            // Catalog Search and Filter Listeners
+            catalogSearchInput.addEventListener('input', (e) => {
+                state.catalogSearch = e.target.value;
+                renderStarChips();
+            });
+
+            catalogFilterSelect.addEventListener('change', (e) => {
+                state.catalogFilter = e.target.value;
+                renderStarChips();
+            });
+
+            // Canvas Click and Hover Interaction
+            function getPointerStar(clientX, clientY) {
+                const rect = canvas.getBoundingClientRect();
+                const px = clientX - rect.left;
+                const py = clientY - rect.top;
+
+                for (let i = state.starScreenCoords.length - 1; i >= 0; i--) {
+                    const item = state.starScreenCoords[i];
+                    const dist = Math.hypot(px - item.x, py - item.y);
+                    if (dist <= item.hitRadius) {
+                        return item.star;
+                    }
+                }
+                return null;
+            }
+
+            canvas.addEventListener('mousemove', (e) => {
+                const hit = getPointerStar(e.clientX, e.clientY);
+                state.hoveredStarId = hit ? hit.id : null;
+                canvas.style.cursor = hit ? 'pointer' : 'crosshair';
+            });
+
+            canvas.addEventListener('click', (e) => {
+                const hit = getPointerStar(e.clientX, e.clientY);
+                if (hit) {
+                    state.selectedStarId = hit.id;
+                    updateStarCard();
+                }
+            });
+
+            closeCardBtn.addEventListener('click', () => {
+                state.selectedStarId = null;
+                starCard.classList.add('hidden');
+            });
+
+            // ResizeObserver & window resize for crisp responsive sizing
+            if (typeof ResizeObserver !== 'undefined') {
+                const ro = new ResizeObserver(() => resizeCanvas());
+                ro.observe(canvasContainer);
+            }
+            window.addEventListener('resize', resizeCanvas);
+
+            // Initialization
+            function init() {
+                birthInput.value = DEFAULT_BIRTH_STR;
+                state.birthTimestamp = new Date(DEFAULT_BIRTH_STR).getTime();
+                targetDateInput.value = toLocalDatetimeInputString(new Date());
+
+                generateBackgroundStars(190);
+                renderStarChips();
+                setZoomByLY(20.0);
+                resizeCanvas();
+                requestAnimationFrame(renderFrame);
+            }
+
+            window.addEventListener('load', init);
+        })();
+    </script>
+</body>
+</html>
+```
